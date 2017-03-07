@@ -67,7 +67,8 @@ public class MainActivity extends BaseActivity implements CardPickerDialog.Click
         setToolBar();
         setViewPager();
         setUpDrawer();
-        HandlerUtil.getInstance(this).postDelayed(new Runnable() {
+        //z..  3秒之后移除splashScreen
+        HandlerUtil.getInstance(this).postDelayed(new Runnable() {  //发送延时3秒消息,异步移除初始界面 
             @Override
             public void run() {
                 splashScreen.removeSplashScreen();
@@ -76,7 +77,9 @@ public class MainActivity extends BaseActivity implements CardPickerDialog.Click
 
     }
 
-
+    /**
+     * 设置toolbar   可以代替actionBar的组件,设置按钮
+     */
     private void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -138,7 +141,9 @@ public class MainActivity extends BaseActivity implements CardPickerDialog.Click
         });
     }
 
-
+     /**
+     * 侧滑菜单
+     */
     private void setUpDrawer() {
         LayoutInflater inflater = LayoutInflater.from(this);
         mLvLeftMenu.addHeaderView(inflater.inflate(R.layout.nav_header_main, mLvLeftMenu, false));
@@ -150,26 +155,26 @@ public class MainActivity extends BaseActivity implements CardPickerDialog.Click
                     case 1:
                         drawerLayout.closeDrawers();
                         break;
-                    case 2:
+                    case 2:                                     //主题换肤   
                         CardPickerDialog dialog = new CardPickerDialog();
                         dialog.setClickListener(MainActivity.this);
                         dialog.show(getSupportFragmentManager(), "theme");
                         drawerLayout.closeDrawers();
 
                         break;
-                    case 3:
+                    case 3:                                  //定时关闭音乐 
                         TimingFragment fragment3 = new TimingFragment();
                         fragment3.show(getSupportFragmentManager(), "timing");
                         drawerLayout.closeDrawers();
 
                         break;
-                    case 4:
+                    case 4:                                 //下载歌曲品质
                         BitSetFragment bfragment = new BitSetFragment();
                         bfragment.show(getSupportFragmentManager(), "bitset");
                         drawerLayout.closeDrawers();
 
                         break;
-                    case 5:
+                    case 5:                             //退出
                         if (MusicPlayer.isPlaying()) {
                             MusicPlayer.playOrPause();
                         }
